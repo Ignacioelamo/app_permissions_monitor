@@ -10,9 +10,21 @@ class MethodChannelAppPermissionsMonitor extends AppPermissionsMonitorPlatform {
   final methodChannel = const MethodChannel('app_permissions_monitor');
 
   @override
-  Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
-    return version;
+  Future<String?> getDeviceId() async {
+    final id = await methodChannel.invokeMethod<String>('getDeviceId');
+    return id;
+  }
+
+  @override
+  Future<bool?> getScreenLockType() async {
+    final result = await methodChannel.invokeMethod('getScreenLockType');
+    return result;
+  }
+
+  @override
+  Future<bool?> getLocationStatus() async {
+    final result = await methodChannel.invokeMethod('getLocationStatus');
+    return result;
   }
 
   @override
@@ -21,9 +33,5 @@ class MethodChannelAppPermissionsMonitor extends AppPermissionsMonitorPlatform {
     return result;
   }
 
-  @override
-  Future<List<String>> detectPermissionGroupChanges(List<Map<String, dynamic>> oldPermissions) async {
-    final result = await methodChannel.invokeMethod('detectPermissionGroupChanges', {'oldPermissions': oldPermissions});
-    return result;
-  }
+
 }

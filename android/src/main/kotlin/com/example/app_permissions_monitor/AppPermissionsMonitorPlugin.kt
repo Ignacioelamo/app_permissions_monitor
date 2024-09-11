@@ -3,6 +3,7 @@ package com.example.app_permissions_monitor
 import androidx.annotation.NonNull
 import android.content.Context
 import android.os.Build
+import com.example.app_permissions_monitor.helpers.DeviceHelper
 
 
 import com.example.app_permissions_monitor.helpers.PermissionHelper
@@ -32,16 +33,20 @@ class AppPermissionsMonitorPlugin: FlutterPlugin, MethodCallHandler {
 
   override fun onMethodCall(call: MethodCall, result: Result) {
     when (call.method) {
-        "getPlatformVersion" -> {
-          result.success("Android ${Build.VERSION.RELEASE}")
+        "getDeviceId" -> {
+          val deviceId = DeviceHelper.getDeviceId(context)
+            result.success(deviceId)
+        }
+        "getScreenLockType" -> {
+            val screenLockType = DeviceHelper.getScreenLockType(context)
+            result.success(screenLockType)
+        }
+        "getLocationStatus" -> {
+            val locationEnabled = DeviceHelper.getLocationStatus(context)
+            result.success(locationEnabled)
         }
         "getInstalledAppsPermissionStatuses" -> {
             val appPermissions = PermissionHelper.getAppPermissionStatuses(context)
-            result.success(appPermissions)
-        }
-        "detectPermissionGroupChanges" -> {
-            val oldPermissions = call.argument<List<Map<String, Any>>>("oldPermissions")
-            val appPermissions = PermissionHelper.detectPermissionGroupChanges(context, oldPermissions ?: emptyList())
             result.success(appPermissions)
         }
         else -> {

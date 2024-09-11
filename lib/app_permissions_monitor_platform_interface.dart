@@ -23,17 +23,23 @@ abstract class AppPermissionsMonitorPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
+  Future<String?> getDeviceId() {
+    throw UnimplementedError('getDeviceId() has not been implemented.');
+  }
+
+  Future<bool?> getScreenLockType() {
+    throw UnimplementedError('getScreenLockType() has not been implemented.');
+  }
+
+  Future<bool?> getLocationStatus() {
+    throw UnimplementedError('getLocationStatus() has not been implemented.');
   }
 
   Future<List<dynamic>> getInstalledAppsPermissionStatuses() {
     throw UnimplementedError('getInstalledAppsPermissionStatuses() has not been implemented.');
   }
 
-  Future<List<String>> detectPermissionGroupChanges(List<Map<String, dynamic>> oldPermissions) {
-    throw UnimplementedError('detectPermissionGroupChanges() has not been implemented.');
-  }
+
 
 
 }

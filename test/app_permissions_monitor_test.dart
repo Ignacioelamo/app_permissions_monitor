@@ -24,6 +24,24 @@ class MockAppPermissionsMonitorPlatform
     // TODO: implement getInstalledAppsPermissionStatuses
     throw UnimplementedError();
   }
+
+  @override
+  Future<String?> getDeviceId() {
+    // TODO: implement getDeviceId
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool?> getScreenLockType() {
+    // TODO: implement getScreenLockType
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool?> getLocationStatus() {
+    // TODO: implement getLocationStatus
+    throw UnimplementedError();
+  }
 }
 
 void main() {
@@ -38,6 +56,6 @@ void main() {
     MockAppPermissionsMonitorPlatform fakePlatform = MockAppPermissionsMonitorPlatform();
     AppPermissionsMonitorPlatform.instance = fakePlatform;
 
-    expect(await appPermissionsMonitorPlugin.getPlatformVersion(), '42');
+    expect(await appPermissionsMonitorPlugin.getDeviceId(), '42');
   });
 }

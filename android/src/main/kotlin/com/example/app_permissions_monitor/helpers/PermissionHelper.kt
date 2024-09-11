@@ -68,43 +68,7 @@ class PermissionHelper {
             return appPermissions
         }
 
-         fun detectPermissionGroupChanges(context: Context, previousPermissions: List<Map<String, Any>>): List<String> {
-            val actualPermissions = getAppPermissionStatuses(context)
-            val changes = mutableListOf<String>()
 
-            val previousPermissionsMap = previousPermissions.associateBy { it["packageName"] as String }
-            val actualPermissionsMap = actualPermissions.associateBy { it["packageName"] as String }
-
-            for ((packageName, actualPermissionStatus) in actualPermissionsMap) {
-                if (previousPermissionsMap.containsKey(packageName)) {
-                    val previousGroups =
-                        (previousPermissionsMap[packageName]?.get("permissionGroups") as Map<String, String>)
-                    val actualGroups = actualPermissionStatus["permissionGroups"] as Map<String, String>
-                    for ((groupName, actualStatus) in actualGroups) {
-                        val previousStatus = previousGroups[groupName]
-                        if (previousStatus != actualStatus) {
-                            changes.add("$packageName,$groupName,$previousStatus,$actualStatus")
-                        }
-                    }
-                } else {
-                    val actualGroups = actualPermissionStatus["permissionGroups"] as Map<String, String>
-                    for ((groupName, actualStatus) in actualGroups) {
-                        changes.add("$packageName,$groupName,null,$actualStatus")
-                    }
-                }
-            }
-
-            for ((packageName, previousPermissionStatus) in previousPermissionsMap) {
-                if (!actualPermissionsMap.containsKey(packageName)) {
-                    val previousGroups = previousPermissionStatus["permissionGroups"] as Map<String, String>
-                    for ((groupName, previousStatus) in previousGroups) {
-                        changes.add("$packageName,$groupName,$previousStatus,null")
-                    }
-                }
-            }
-
-            return changes
-        }
 
 
         /**
