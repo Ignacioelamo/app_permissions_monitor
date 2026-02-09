@@ -2,11 +2,13 @@ package com.example.app_permissions_monitor
 
 import androidx.annotation.NonNull
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import com.example.app_permissions_monitor.helpers.DeviceHelper
 
 
 import com.example.app_permissions_monitor.helpers.PermissionHelper
+import com.example.app_permissions_monitor.helpers.UsageStatsHelper
 
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -48,6 +50,24 @@ class AppPermissionsMonitorPlugin: FlutterPlugin, MethodCallHandler {
         "getInstalledAppsPermissionStatuses" -> {
             val appPermissions = PermissionHelper.getAppPermissionStatuses(context)
             result.success(appPermissions)
+        }
+        "hasUsageStatsPermission" -> {
+            val hasPermission = UsageStatsHelper.hasUsageStatsPermission(context)
+            result.success(hasPermission)
+        }
+        "getAppUsageToday" -> {
+            val usageStats = UsageStatsHelper.getAppUsageToday(context)
+            result.success(usageStats)
+        }
+        "requestUsageStatsPermission" -> {
+            try {
+                val intent = Intent(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.startActivity(intent)
+                result.success(true)
+            } catch (e: Exception) {
+                result.success(false)
+            }
         }
         else -> {
           result.notImplemented()

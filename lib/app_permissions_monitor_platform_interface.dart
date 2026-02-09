@@ -39,8 +39,16 @@ abstract class AppPermissionsMonitorPlatform extends PlatformInterface {
     throw UnimplementedError('getInstalledAppsPermissionStatuses() has not been implemented.');
   }
 
+  Future<bool?> hasUsageStatsPermission() {
+    throw UnimplementedError('hasUsageStatsPermission() has not been implemented.');
+  }
 
+  Future<List<dynamic>> getAppUsageToday() {
+    throw UnimplementedError('getAppUsageToday() has not been implemented.');
+  }
 
-
+  Future<bool?> requestUsageStatsPermission() {
+    throw UnimplementedError('requestUsageStatsPermission() has not been implemented.');
+  }
 }
 

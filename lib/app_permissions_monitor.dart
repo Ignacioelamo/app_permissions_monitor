@@ -1,6 +1,3 @@
-
-import 'dart:ffi';
-
 import 'app_permissions_monitor_platform_interface.dart';
 
 class AppPermissionsMonitor {
@@ -20,5 +17,15 @@ class AppPermissionsMonitor {
     return AppPermissionsMonitorPlatform.instance.getInstalledAppsPermissionStatuses();
   }
 
+  Future<bool?> hasUsageStatsPermission() {
+    return AppPermissionsMonitorPlatform.instance.hasUsageStatsPermission();
+  }
 
+  Future<List<dynamic>> getAppUsageToday() {
+    return AppPermissionsMonitorPlatform.instance.getAppUsageToday();
+  }
+
+  Future<bool?> requestUsageStatsPermission() {
+    return AppPermissionsMonitorPlatform.instance.requestUsageStatsPermission();
+  }
 }

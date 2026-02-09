@@ -33,5 +33,22 @@ class MethodChannelAppPermissionsMonitor extends AppPermissionsMonitorPlatform {
     return result;
   }
 
+  @override
+  Future<bool?> hasUsageStatsPermission() async {
+    final result = await methodChannel.invokeMethod<bool>('hasUsageStatsPermission');
+    return result;
+  }
 
+  @override
+  Future<List<dynamic>> getAppUsageToday() async {
+    final result = await methodChannel.invokeMethod('getAppUsageToday');
+    if (result == null) return [];
+    return result;
+  }
+
+  @override
+  Future<bool?> requestUsageStatsPermission() async {
+    final result = await methodChannel.invokeMethod<bool>('requestUsageStatsPermission');
+    return result;
+  }
 }
