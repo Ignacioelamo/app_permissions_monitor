@@ -7,53 +7,40 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 class MockAppPermissionsMonitorPlatform
     with MockPlatformInterfaceMixin
     implements AppPermissionsMonitorPlatform {
+  @override
+  Future<String?> getDeviceId() => Future.value('42');
 
   @override
-  Future<String?> getPlatformVersion() => Future.value('42');
-
-
+  Future<bool?> isScreenLocked() => throw UnimplementedError();
 
   @override
-  Future<List<String>> detectPermissionGroupChanges(List<Map<String, dynamic>> oldPermissions) {
-    // TODO: implement detectPermissionGroupChanges
-    throw UnimplementedError();
-  }
+  Future<bool?> getLocationStatus() => throw UnimplementedError();
 
   @override
-  Future<List> getInstalledAppsPermissionStatuses() {
-    // TODO: implement getInstalledAppsPermissionStatuses
-    throw UnimplementedError();
-  }
+  Future<List<dynamic>> getInstalledAppsPermissionStatuses() =>
+      throw UnimplementedError();
 
   @override
-  Future<String?> getDeviceId() {
-    // TODO: implement getDeviceId
-    throw UnimplementedError();
-  }
+  Future<bool?> hasUsageStatsPermission() => throw UnimplementedError();
 
   @override
-  Future<bool?> getScreenLockType() {
-    // TODO: implement getScreenLockType
-    throw UnimplementedError();
-  }
+  Future<List<dynamic>> getAppUsageToday() => throw UnimplementedError();
 
   @override
-  Future<bool?> getLocationStatus() {
-    // TODO: implement getLocationStatus
-    throw UnimplementedError();
-  }
+  Future<bool?> requestUsageStatsPermission() => throw UnimplementedError();
 }
 
 void main() {
-  final AppPermissionsMonitorPlatform initialPlatform = AppPermissionsMonitorPlatform.instance;
+  final AppPermissionsMonitorPlatform initialPlatform =
+      AppPermissionsMonitorPlatform.instance;
 
   test('$MethodChannelAppPermissionsMonitor is the default instance', () {
     expect(initialPlatform, isInstanceOf<MethodChannelAppPermissionsMonitor>());
   });
 
-  test('getPlatformVersion', () async {
-    AppPermissionsMonitor appPermissionsMonitorPlugin = AppPermissionsMonitor();
-    MockAppPermissionsMonitorPlatform fakePlatform = MockAppPermissionsMonitorPlatform();
+  test('getDeviceId delegates to platform', () async {
+    final appPermissionsMonitorPlugin = AppPermissionsMonitor();
+    final fakePlatform = MockAppPermissionsMonitorPlatform();
     AppPermissionsMonitorPlatform.instance = fakePlatform;
 
     expect(await appPermissionsMonitorPlugin.getDeviceId(), '42');
