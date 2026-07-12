@@ -19,21 +19,11 @@ class DeviceHelper {
             return  Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
         }
 
-        fun getScreenLockType(context: Context): Boolean {
+        fun isScreenLocked(context: Context): Boolean {
             val keyguardManager = context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
             return when {
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> {
-                    when {
-                        keyguardManager.isDeviceSecure -> true
-                        else -> false
-                    }
-                }
-                else -> {
-                    when {
-                        keyguardManager.isKeyguardSecure -> true
-                        else -> false
-                    }
-                }
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> keyguardManager.isDeviceSecure
+                else -> keyguardManager.isKeyguardSecure
             }
         }
 

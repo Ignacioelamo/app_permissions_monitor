@@ -27,8 +27,8 @@ abstract class AppPermissionsMonitorPlatform extends PlatformInterface {
     throw UnimplementedError('getDeviceId() has not been implemented.');
   }
 
-  Future<bool?> getScreenLockType() {
-    throw UnimplementedError('getScreenLockType() has not been implemented.');
+  Future<bool?> isScreenLocked() {
+    throw UnimplementedError('isScreenLocked() has not been implemented.');
   }
 
   Future<bool?> getLocationStatus() {

@@ -16,8 +16,8 @@ class MethodChannelAppPermissionsMonitor extends AppPermissionsMonitorPlatform {
   }
 
   @override
-  Future<bool?> getScreenLockType() async {
-    final result = await methodChannel.invokeMethod('getScreenLockType');
+  Future<bool?> isScreenLocked() async {
+    final result = await methodChannel.invokeMethod('isScreenLocked');
     return result;
   }
 

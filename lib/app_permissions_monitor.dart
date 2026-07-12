@@ -5,8 +5,8 @@ class AppPermissionsMonitor {
     return AppPermissionsMonitorPlatform.instance.getDeviceId();
   }
 
-  Future<bool?> getScreenLockType() {
-    return AppPermissionsMonitorPlatform.instance.getScreenLockType();
+  Future<bool?> isScreenLocked() {
+    return AppPermissionsMonitorPlatform.instance.isScreenLocked();
   }
 
   Future<bool?> getLocationStatus() {

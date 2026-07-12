@@ -39,9 +39,9 @@ class AppPermissionsMonitorPlugin: FlutterPlugin, MethodCallHandler {
           val deviceId = DeviceHelper.getDeviceId(context)
             result.success(deviceId)
         }
-        "getScreenLockType" -> {
-            val screenLockType = DeviceHelper.getScreenLockType(context)
-            result.success(screenLockType)
+        "isScreenLocked" -> {
+            val isLocked = DeviceHelper.isScreenLocked(context)
+            result.success(isLocked)
         }
         "getLocationStatus" -> {
             val locationEnabled = DeviceHelper.getLocationStatus(context)
