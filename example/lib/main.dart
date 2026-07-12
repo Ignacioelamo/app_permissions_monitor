@@ -8,9 +8,8 @@ import 'package:app_permissions_monitor/app_permissions_monitor.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
-
-@pragma('vm:entry-point') // Mandatory if the App is obfuscated or using Flutter 3.1+
+@pragma(
+    'vm:entry-point') // Mandatory if the App is obfuscated or using Flutter 3.1+
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
     if (kDebugMode) {
@@ -19,12 +18,11 @@ void callbackDispatcher() {
 
     try {
       // Get the installed apps permission statuses
-      List<dynamic> appsPermissions = await AppPermissionsMonitor().getInstalledAppsPermissionStatuses();
-      print("Esto funciona babyyy");
-      var content = "Background task executed at ${DateTime.now().toString()}\n";
+      List<dynamic> appsPermissions =
+          await AppPermissionsMonitor().getInstalledAppsPermissionStatuses();
+      var content =
+          "Background task executed at ${DateTime.now().toString()}\n";
       FileManager().writeToFile('prueba.txt', content);
-
-
     } catch (e) {
       if (kDebugMode) {
         print('Error initializing FlutterBackgroundServiceAndroid: $e');
@@ -46,14 +44,16 @@ Future<void> main() async {
   _requestPermissions();
   FileManager().createFile('prueba.txt');
 
-
   Workmanager().initialize(
       callbackDispatcher, // The top level function, aka callbackDispatcher
-      isInDebugMode: true // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
-  );
+      isInDebugMode:
+          true // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
+      );
 
-  Workmanager().registerPeriodicTask("task-identifier", "simplePeriodicTask", frequency: const Duration(seconds: 2));
-  Workmanager().registerOneOffTask("Initialization", "Initialization_task", initialDelay: Duration(seconds: 5));
+  Workmanager().registerPeriodicTask("task-identifier", "simplePeriodicTask",
+      frequency: const Duration(seconds: 2));
+  Workmanager().registerOneOffTask("Initialization", "Initialization_task",
+      initialDelay: Duration(seconds: 5));
 
   runApp(const MyApp());
 }
@@ -81,9 +81,10 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      print("El id del dispositivo es: ${await _appPermissionsMonitorPlugin.getLocationStatus()}");
-      platformVersion =
-          await _appPermissionsMonitorPlugin.getDeviceId() ?? 'Unknown platform version';
+      print(
+          "El id del dispositivo es: ${await _appPermissionsMonitorPlugin.getLocationStatus()}");
+      platformVersion = await _appPermissionsMonitorPlugin.getDeviceId() ??
+          'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
